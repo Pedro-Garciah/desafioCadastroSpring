@@ -1,0 +1,86 @@
+package com.example.desafioCadastroSpring.model;
+
+import com.example.desafioCadastroSpring.model.Enums.Sex;
+import com.example.desafioCadastroSpring.model.Enums.Type;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "tb-pets")
+public class Pet {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    private Type type;
+
+    @Enumerated(EnumType.STRING)
+    private Sex sex;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    private int age;
+
+    private int weightInGrams;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getWeightInGrams() {
+        return weightInGrams;
+    }
+
+    public void setWeightInGrams(int weightInGrams) {
+        this.weightInGrams = weightInGrams;
+    }
+}
