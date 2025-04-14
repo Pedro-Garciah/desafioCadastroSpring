@@ -10,7 +10,7 @@ public class Pet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     private String name;
 
@@ -20,13 +20,22 @@ public class Pet {
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address_id")
     private Address address;
 
     private int age;
 
     private int weightInGrams;
+
+    public Pet(String name, Type type, Sex sex, Address address, int age, int weightInGrams) {
+        this.name = name;
+        this.type = type;
+        this.sex = sex;
+        this.address = address;
+        this.age = age;
+        this.weightInGrams = weightInGrams;
+    }
 
     public long getId() {
         return id;
