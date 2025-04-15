@@ -3,6 +3,7 @@ package com.example.desafioCadastroSpring.controller;
 import com.example.desafioCadastroSpring.dto.PetDto;
 import com.example.desafioCadastroSpring.model.Pet;
 import com.example.desafioCadastroSpring.repository.PetRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class PetController {
     private PetRepository petRepository;
 
     @PostMapping
-    public ResponseEntity savePet(@RequestBody PetDto petDto){
+    public ResponseEntity savePet(@RequestBody @Valid PetDto petDto){
         Pet pet = petDto.toPet();
         petRepository.save(pet);
         return ResponseEntity.status(HttpStatus.CREATED).build();

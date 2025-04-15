@@ -24,17 +24,20 @@ public class Pet {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    private int age;
+    private double age;
 
-    private int weightInGrams;
+    private double weight;
 
-    public Pet(String name, Type type, Sex sex, Address address, int age, int weightInGrams) {
+    private String breed;
+
+    public Pet(String name, Type type, Sex sex, Address address, double age, double weight, String breed) {
         this.name = name;
         this.type = type;
         this.sex = sex;
         this.address = address;
         this.age = age;
-        this.weightInGrams = weightInGrams;
+        this.weight = weight;
+        this.breed = breed;
     }
 
     public long getId() {
@@ -77,7 +80,7 @@ public class Pet {
         this.address = address;
     }
 
-    public int getAge() {
+    public double getAge() {
         return age;
     }
 
@@ -85,11 +88,19 @@ public class Pet {
         this.age = age;
     }
 
-    public int getWeightInGrams() {
-        return weightInGrams;
+    public double getWeight() {
+        return weight;
     }
 
-    public void setWeightInGrams(int weightInGrams) {
-        this.weightInGrams = weightInGrams;
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
     }
 }
