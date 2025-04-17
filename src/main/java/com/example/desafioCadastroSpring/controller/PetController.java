@@ -7,6 +7,7 @@ import com.example.desafioCadastroSpring.repository.PetRepository;
 import com.example.desafioCadastroSpring.service.PetService;
 import com.example.desafioCadastroSpring.specification.PetSpecification;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.data.jpa.domain.Specification;
@@ -45,12 +46,18 @@ public class PetController {
         return ResponseEntity.ok(petService.getAllPets());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity getPetsById(@PathVariable Long id){
+        return ResponseEntity.ok(petService.getPetsById(id));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deletePet(@PathVariable Long id){
         petService.deletePet(id);
         return ResponseEntity.noContent().build();
     }
 
+    // Busca Pets por atributos
     @PostMapping("/search")
     public ResponseEntity searchPets(@RequestBody @Valid SearchPetDto dto) {
         List<Pet> all = petService.searchPetByParameter(dto);
