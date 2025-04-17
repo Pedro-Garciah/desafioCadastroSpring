@@ -40,6 +40,11 @@ public class PetController {
         return ResponseEntity.ok(petService.updatePet(id, petDto));
     }
 
+    @GetMapping
+    public ResponseEntity getAllPets(){
+        return ResponseEntity.ok(petService.getAllPets());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deletePet(@PathVariable Long id){
         petService.deletePet(id);

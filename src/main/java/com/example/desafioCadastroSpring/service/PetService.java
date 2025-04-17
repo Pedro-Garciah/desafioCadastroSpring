@@ -49,6 +49,10 @@ public class PetService {
         return petRepository.save(pet);
     }
 
+    public List<Pet> getAllPets(){
+        return petRepository.findAll();
+    }
+
     public void deletePet(Long id){
         Optional<Pet> petOpt = petRepository.findById(id);
         petOpt.ifPresent(pet -> petRepository.deleteById(pet.getId()));
