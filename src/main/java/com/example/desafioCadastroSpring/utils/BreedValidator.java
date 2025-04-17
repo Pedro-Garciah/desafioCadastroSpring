@@ -3,9 +3,9 @@ package com.example.desafioCadastroSpring.utils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class BreedValidator implements ConstraintValidator<ValidNameConstraint, String> {
+public class BreedValidator implements ConstraintValidator<ValidBreedConstraint, String> {
     @Override
-    public void initialize(ValidNameConstraint constraintAnnotation) {
+    public void initialize(ValidBreedConstraint constraintAnnotation) {
     }
 
     @Override
