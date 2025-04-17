@@ -8,12 +8,14 @@ import com.example.desafioCadastroSpring.service.PetService;
 import com.example.desafioCadastroSpring.specification.PetSpecification;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/pets")
@@ -21,18 +23,15 @@ public class PetController {
 
     //    private static final Logger log = LoggerFactory.getLogger(NameValidator.class);
     @Autowired
-    private final PetRepository petRepository;
     private final PetService petService;
 
     public PetController(PetRepository petRepository, PetService petService) {
-        this.petRepository = petRepository;
         this.petService = petService;
     }
 
     @PostMapping
     public ResponseEntity savePet(@RequestBody @Valid PetDto petDto) {
-        Pet pet = petDto.toPet();
-        petRepository.save(pet);
+        petService.savePet(petDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -41,18 +40,15 @@ public class PetController {
         return ResponseEntity.ok(petService.updatePet(id, petDto));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletePet(@PathVariable Long id){
+        petService.deletePet(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping("/search")
-    public ResponseEntity searchPets(@RequestBody SearchPetDto dto) {
-
-        Specification<Pet> spec = Specification.where(PetSpecification.nameContains(dto.name())
-                .and(PetSpecification.hasType(dto.type()))
-                .and(PetSpecification.hasSex(dto.sex()))
-                .and(PetSpecification.addressContains(dto.address()))
-                .and(PetSpecification.ageEquals(dto.age()))
-                .and(PetSpecification.weightEquals(dto.weight()))
-                .and(PetSpecification.breedContains(dto.breed())));
-
-        List<Pet> all = petRepository.findAll(spec);
+    public ResponseEntity searchPets(@RequestBody @Valid SearchPetDto dto) {
+        List<Pet> all = petService.searchPetByParameter(dto);
         return ResponseEntity.ok(all);
     }
 }

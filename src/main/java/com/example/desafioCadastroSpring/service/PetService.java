@@ -1,11 +1,17 @@
 package com.example.desafioCadastroSpring.service;
 
 import com.example.desafioCadastroSpring.dto.PetDto;
+import com.example.desafioCadastroSpring.dto.SearchPetDto;
 import com.example.desafioCadastroSpring.model.Address;
 import com.example.desafioCadastroSpring.model.Pet;
 import com.example.desafioCadastroSpring.repository.PetRepository;
+import com.example.desafioCadastroSpring.specification.PetSpecification;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PetService {
@@ -14,6 +20,11 @@ public class PetService {
 
     public PetService(PetRepository petRepository) {
         this.petRepository = petRepository;
+    }
+
+    public Pet savePet(PetDto petDto){
+        Pet pet = petDto.toPet();
+        return petRepository.save(pet);
     }
 
     public Pet updatePet(Long id, PetDto petDto) {
@@ -36,5 +47,22 @@ public class PetService {
         pet.setAddress(address);
 
         return petRepository.save(pet);
+    }
+
+    public void deletePet(Long id){
+        Optional<Pet> petOpt = petRepository.findById(id);
+        petOpt.ifPresent(pet -> petRepository.deleteById(pet.getId()));
+    }
+
+    public List<Pet> searchPetByParameter(SearchPetDto dto){
+        Specification<Pet> petSpecs = Specification.where(PetSpecification.nameContains(dto.name())
+                .and(PetSpecification.hasType(dto.type()))
+                .and(PetSpecification.hasSex(dto.sex()))
+                .and(PetSpecification.addressContains(dto.address()))
+                .and(PetSpecification.ageEquals(dto.age()))
+                .and(PetSpecification.weightEquals(dto.weight()))
+                .and(PetSpecification.breedContains(dto.breed())));
+
+        return petRepository.findAll(petSpecs);
     }
 }
