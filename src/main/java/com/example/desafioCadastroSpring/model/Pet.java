@@ -24,11 +24,14 @@ public class Pet {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    private double age;
+    private Double age;
 
-    private double weight;
+    private Double weight;
 
     private String breed;
+
+    public Pet() {
+    }
 
     public Pet(String name, Type type, Sex sex, Address address, double age, double weight, String breed) {
         this.name = name;
@@ -84,7 +87,7 @@ public class Pet {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Double age) {
         this.age = age;
     }
 
@@ -92,7 +95,7 @@ public class Pet {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 

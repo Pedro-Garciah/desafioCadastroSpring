@@ -4,7 +4,7 @@ import com.example.desafioCadastroSpring.model.Address;
 
 public record AddressDto(
         String street,
-        int number,
+        Integer number,
         String city) {
 
     public Address toAddress() {

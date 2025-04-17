@@ -2,16 +2,12 @@ package com.example.desafioCadastroSpring.dto;
 
 import com.example.desafioCadastroSpring.model.Enums.Sex;
 import com.example.desafioCadastroSpring.model.Enums.Type;
-import com.example.desafioCadastroSpring.model.Pet;
 import com.example.desafioCadastroSpring.utils.ValidBreedConstraint;
-import com.example.desafioCadastroSpring.utils.ValidNameConstraint;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 
-public record PetDto(
+public record SearchPetDto(
 
-        @ValidNameConstraint
         String name,
 
         Type type,
@@ -29,17 +25,4 @@ public record PetDto(
 
         @ValidBreedConstraint
         String breed) {
-
-
-
-    public Pet toPet() {
-        return new Pet(
-                name,
-                type,
-                sex,
-                address.toAddress(),
-                age,
-                weight,
-                breed);
-    }
 }
