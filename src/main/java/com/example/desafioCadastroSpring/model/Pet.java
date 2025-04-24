@@ -43,6 +43,17 @@ public class Pet {
         this.breed = breed;
     }
 
+    public Pet(Long id, String name, Type type, Sex sex, Address address, Double age, Double weight, String breed) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.sex = sex;
+        this.address = address;
+        this.age = age;
+        this.weight = weight;
+        this.breed = breed;
+    }
+
     public long getId() {
         return id;
     }

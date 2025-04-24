@@ -53,7 +53,7 @@ public class PetService {
         return petRepository.findAll();
     }
 
-    public Pet getPetsById(Long id){
+    public Pet getPetById(Long id){
         return petRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
