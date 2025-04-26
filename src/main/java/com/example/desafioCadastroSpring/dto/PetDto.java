@@ -7,7 +7,6 @@ import com.example.desafioCadastroSpring.utils.ValidBreedConstraint;
 import com.example.desafioCadastroSpring.utils.ValidNameConstraint;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 
 public record PetDto(
 
@@ -29,7 +28,6 @@ public record PetDto(
 
         @ValidBreedConstraint
         String breed) {
-
 
 
     public Pet toPet() {

@@ -53,8 +53,8 @@ public class PetService {
         return petRepository.findAll();
     }
 
-    public Pet getPetById(Long id){
-        return petRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    public Optional<Pet> getPetById(Long id){
+        return petRepository.findById(id);
     }
 
     public void deletePet(Long id){
